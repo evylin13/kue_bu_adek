@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - CRUD Produk</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .header {
+        background-color: #333;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+        font-size: 24px;
+      }
+      .header span {
+        color: #ff4500;
+      }
+      .content {
+        margin: 20px auto;
+        max-width: 800px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #333;
+        color: white;
+      }
+      .form-container {
+        margin-top: 20px;
+      }
+      .form-container input,
+      .form-container textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .form-container button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .form-container button:hover {
+        background-color: #45a049;
+      }
+      .action-buttons button {
+        padding: 5px 10px;
+        margin: 0 5px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .action-buttons .edit {
+        background-color: #2196f3;
+        color: white;
+      }
+      .action-buttons .delete {
+        background-color: #f44336;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header d-flex justify-content-between align-items-center px-3">
+      <span><span style="color: #ff4500">Selamat Datang</span> - Admin </span>
+    </div>
+
+    <!-- form nampilkan produk -->
+    <div class="content">
+      <h2>Daftar Produk</h2>
+      <table id="productTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Deskripsi</th>
+            <th>Gambar</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="6" style="text-align: center">Tidak ada produk</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- form tambah produk -->
+      <div class="form-container">
+        <h3 id="formTitle">Tambah Produk</h3>
+        <form id="addProductForm" onsubmit="addProduct(event)">
+          <label for="nama">Nama Produk:</label>
+          <input type="text" id="nama" name="nama" placeholder="Contoh Nama Makanan : Kue Bolu" required />
+
+          <label for="harga">Harga:</label>
+          <input type="number" id="harga" name="harga" placeholder="Contoh Harga : 3000" required />
+
+          <label for="deskripsi">Deskripsi:</label>
+          <textarea id="deskripsi" name="deskripsi" required></textarea>
+
+          <label for="image">Gambar Produk:</label>
+          <input type="file" id="image" name="image" accept="image/*" required />
+
+          <button type="submit">Tambah Produk</button>
+        </form>
+      </div>
+
+      <!-- form edit produk -->
+      <form id="editProductForm" class="table-responsive" style="display: none" onsubmit="updateProduct(event)">
+        <input type="hidden" id="editId" name="id" />
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th colspan="2">Edit Produk</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><label for="editNama">Nama Produk:</label></td>
+              <td><input type="text" class="form-control" id="editNama" name="nama" required /></td>
+            </tr>
+            <tr>
+              <td><label for="editHarga">Harga:</label></td>
+              <td><input type="number" class="form-control" id="editHarga" name="harga" required /></td>
+            </tr>
+            <tr>
+              <td><label for="editDeskripsi">Deskripsi:</label></td>
+              <td><textarea class="form-control" id="editDeskripsi" name="deskripsi" required></textarea></td>
+            </tr>
+            <tr>
+              <td colspan="2" class="text-end">
+                <button type="submit" class="btn btn-success">Simpan Perubahan</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+
+    <!-- form nampilkan data pemesanan -->
+    <div class="content mt-4">
+      <h2>Daftar Pesanan</h2>
+      <table id="ordersTable" class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Nama Pelanggan</th>
+            <th>Nama Produk</th>
+            <th>Jumlah</th>
+            <th>Total Harga</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="6" style="text-align: center">Tidak ada pesanan</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      let products = []; // Simpan data produk
+
+      function renderTable() {
+        const productTable = document.getElementById('productTable').querySelector('tbody');
+        productTable.innerHTML = '';
+        if (products.length === 0) {
+          productTable.innerHTML = '<tr><td colspan="6" style="text-align: center;">Tidak ada produk</td></tr>';
+          return;
+        }
+        products.forEach((product) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${product.id}</td>
+            <td>${product.nama}</td>
+            <td>Rp ${product.harga}</td>
+            <td>${product.deskripsi}</td>
+            <td><img src="http://localhost:3000${product.image}" alt="${product.nama}" style="width: 50px; height: 50px;" /></td>
+            <td>
+              <button class="edit" onclick="editProduct(${product.id})">Edit</button>
+              <button class="delete" onclick="deleteProduct(${product.id})">Hapus</button>
+            </td>
+          `;
+          productTable.appendChild(row);
+        });
+      }
+
+      function fetchProducts() {
+        fetch('http://localhost:3000/api/products')
+          .then((response) => response.json())
+          .then((data) => {
+            products = data; // Simpan data ke dalam variabel
+            renderTable();
+          })
+          .catch((error) => console.error('Error:', error));
+      }
+
+      function addProduct(event) {
+        event.preventDefault();
+        const formData = new FormData(document.getElementById('addProductForm'));
+
+        fetch('http://localhost:3000/api/products', {
+          method: 'POST',
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert(data.message);
+            fetchProducts();
+            document.getElementById('addProductForm').reset();
+          })
+          .catch((error) => console.error('Error:', error));
+      }
+
+      function editProduct(id) {
+        const product = products.find((p) => p.id === id);
+        if (!product) return;
+        document.getElementById('editId').value = product.id;
+        document.getElementById('editNama').value = product.nama;
+        document.getElementById('editHarga').value = product.harga;
+        document.getElementById('editDeskripsi').value = product.deskripsi;
+        document.getElementById('editProductForm').style.display = 'block';
+      }
+
+      function updateProduct(event) {
+        event.preventDefault();
+        const id = document.getElementById('editId').value;
+        const formData = new FormData(document.getElementById('editProductForm'));
+
+        fetch(`http://localhost:3000/api/products/${id}`, {
+          method: 'PUT',
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert(data.message);
+            fetchProducts();
+            document.getElementById('editProductForm').style.display = 'none';
+          })
+          .catch((error) => console.error('Error:', error));
+      }
+
+      function deleteProduct(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus produk ini?')) {
+          fetch(`http://localhost:3000/api/products/${id}`, { method: 'DELETE' })
+            .then((response) => response.json())
+            .then((data) => {
+              alert(data.message);
+              fetchProducts();
+            })
+            .catch((error) => console.error('Error:', error));
+        }
+      }
+
+      function fetchOrders() {
+        fetch('http://localhost:3000/api/orders')
+          .then((response) => response.json())
+          .then((orders) => {
+            const tableBody = document.querySelector('#ordersTable tbody');
+            tableBody.innerHTML = ''; // Kosongkan tabel sebelum mengisi ulang
+
+            if (orders.length === 0) {
+              tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Tidak ada pesanan</td></tr>';
+              return;
+            }
+
+            orders.forEach((order) => {
+              const row = `
+          <tr>
+            <td>${order.id}</td>
+            <td>${order.customer_name}</td>
+            <td>${order.product_name}</td>
+            <td>${order.quantity}</td>
+            <td>Rp ${new Intl.NumberFormat('id-ID').format(order.total_price)}</td>
+            <td>${order.status}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" onclick="editOrder(${order.id}, '${order.status}')">Ubah</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteOrder(${order.id})">Hapus</button>
+            </td>
+          </tr>
+        `;
+              tableBody.innerHTML += row;
+            });
+          })
+          .catch((error) => console.error('Error fetching orders:', error));
+      }
+
+      function deleteOrder(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus pesanan ini?')) {
+          fetch(`http://localhost:3000/api/orders/${id}`, { method: 'DELETE' })
+            .then((response) => response.json())
+            .then((data) => {
+              alert(data.message);
+              fetchOrders(); // Perbarui daftar pesanan
+            })
+            .catch((error) => console.error('Error deleting order:', error));
+        }
+      }
+
+      function editOrder(id, currentStatus) {
+        const newStatus = currentStatus === 'Belum Selesai' ? 'Selesai' : 'Belum Selesai';
+        if (confirm(`Ubah status pesanan menjadi "${newStatus}"?`)) {
+          fetch(`http://localhost:3000/api/orders/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: newStatus }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              alert(data.message);
+              fetchOrders();
+            })
+            .catch((error) => console.error('Error updating order status:', error));
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        fetchProducts();
+        fetchOrders();
+      });
+    </script>
+  </body>
+</html>

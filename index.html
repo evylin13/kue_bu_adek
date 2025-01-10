@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kue Bu Adek</title>
+
+    <!-- swiper link  -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- cdn icon link  -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- custom css file  -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- header section start here  -->
+    <header class="header">
+      <div class="logoContent">
+        <a href="#" class="logo"><img src="images/logo.png" alt="" /></a>
+        <h1 class="logoName">Kue Bu Adek</h1>
+      </div>
+
+      <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#product">product</a>
+        <a href="#blogs">blogs</a>
+        <a href="#review">review</a>
+        <a href="#contact">contact</a>
+      </nav>
+
+      <div class="icon">
+        <i class="fas fa-search" id="search"></i>
+        <i class="fas fa-bars" id="menu-bar"></i>
+      </div>
+
+      <div class="search">
+        <input type="search" placeholder="search..." />
+      </div>
+    </header>
+    <!-- header section end here  -->
+
+    <!-- home section start here  -->
+    <section class="home" id="home">
+      <div class="homeContent">
+        <h2>KUE TRADISIONAL YANG LEZAT & BERKUALITAS</h2>
+        <p>Temukan berbagai macam kue tradisional yang lezat dan berkualitas! Hanya Rp.1000,00/biji! We are also available to cater events such as birthdays, weddings, corporate events and much more!</p>
+        <div class="home-btn">
+          <a href="#"><button>see more</button></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- home section end here  -->
+
+    <!-- product section start here  -->
+    <section class="product" id="product">
+      <div class="heading">
+        <h2>Our Exclusive Products</h2>
+      </div>
+      <div class="swiper product-row">
+        <div class="swiper-wrapper"></div>
+      </div>
+    </section>
+    <!-- product section end here  -->
+
+    <!-- Modal Form Pemesanan -->
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="orderModalLabel">Form Pemesanan</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="orderForm">
+              <div class="mb-3">
+                <label for="customerName" class="form-label">Nama Anda</label>
+                <input type="text" class="form-control" id="customerName" placeholder="Masukkan nama Anda" required />
+              </div>
+              <div class="mb-3">
+                <label for="productName" class="form-label">Nama Produk</label>
+                <input type="text" class="form-control" id="productName" readonly />
+              </div>
+              <div class="mb-3">
+                <label for="quantity" class="form-label">Jumlah</label>
+                <input type="number" class="form-control" id="quantity" min="1" value="1" required />
+              </div>
+              <div class="mb-3">
+                <label for="totalPrice" class="form-label">Total Harga</label>
+                <input type="text" class="form-control" id="totalPrice" readonly />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Pesan Sekarang</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- blogs section start here  -->
+    <section class="blogs" id="blogs">
+      <div class="swiper blogs-row">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide box">
+            <div class="img">
+              <img src="images/agar.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>Agar-agar</h3>
+              <p>Agar-agar yang segar dengan rasa manis yang menggoda selera.</p>
+              <p>Agar-agar yang dibuat dengan bahan-bahan alami dan tanpa pengawet.</p>
+              <a href="#blogs" class="btn">learn more</a>
+            </div>
+          </div>
+          <div class="swiper-slide box">
+            <div class="img">
+              <img src="images/risol.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>Risol</h3>
+              <p>Risol yang crispy dengan isi sayuran yang gurih.</p>
+              <p>Risol yang dibuat dengan bahan-bahan alami dan tanpa pengawet.</p>
+              <a href="#blogs" class="btn">learn more</a>
+            </div>
+          </div>
+          <div class="swiper-slide box">
+            <div class="img">
+              <img src="images/dadar.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>Dadar Gulung</h3>
+              <p>Dadar gulung yang lembut dengan rasa pandan yang menggoda selera.</p>
+              <p>Dadar gulung yang dibuat dengan bahan-bahan alami dan tanpa pengawet.</p>
+              <a href="#blogs" class="btn">learn more</a>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <!-- blogs section ends here  -->
+
+    <!-- review section start here  -->
+    <section class="review" id="review">
+      <div class="heading">
+        <h2>client review</h2>
+      </div>
+
+      <div class="swiper review-row">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide box">
+            <div class="client-review">
+              <p>Rasanya sesuai sama saya. Tidak ada pemanis buatannya, tingkatkan terus ya!</p>
+            </div>
+            <div class="client-info">
+              <div class="img">
+                <img src="images/client1.jpg" alt="" />
+              </div>
+              <div class="clientDetailed">
+                <h3>Fatimah</h3>
+                <p>Ibu Rumah Tangga</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide box">
+            <div class="client-review">
+              <p>Rasanya sesuai harga, kue nya tidak ada pengawet dan pemanis buatan. Sehat.</p>
+            </div>
+            <div class="client-info">
+              <div class="img">
+                <img src="images/client2.jpg" alt="" />
+              </div>
+              <div class="clientDetailed">
+                <h3>Reza Pahlevi S.Kom</h3>
+                <p>DPRD Kota Medan</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide box">
+            <div class="client-review">
+              <p>Enak Bu Adek, risol nya dilembutin lagi ya. Selebihnya udah pas! Mantap.</p>
+            </div>
+            <div class="client-info">
+              <div class="img">
+                <img src="images/client3.jpg" alt="" />
+              </div>
+              <div class="clientDetailed">
+                <h3>Iriani</h3>
+                <p>Ibu Pengajian</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide box">
+            <div class="client-review">
+              <p>Perpaduan gula merah & kelapa dadar gulungnya manis. Agar" yg bervariasi warnanya cukup menarik.</p>
+            </div>
+            <div class="client-info">
+              <div class="img">
+                <img src="images/client4.jpg" alt="" />
+              </div>
+              <div class="clientDetailed">
+                <h3>Asni</h3>
+                <p>Komting IF-D SG</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+    <!-- review section ends here  -->
+
+    <!-- footer section start here  -->
+
+    <footer class="footer" id="contact">
+      <div class="box-container">
+        <div class="mainBox">
+          <div class="content">
+            <a href="#"><img src="images/logo.png" alt="" /></a>
+            <h1 class="logoName">Kue Bu Adek</h1>
+          </div>
+
+          <p>
+            Kue Bu Adek merupakan hasil usaha mandiri. Menggunakan bahan berkualitas, sehat, dan aman. Usaha ini didirikan sebagai usaha pribadi, mencerminkan dedikasi dan kualitas dari Bu Adek dalam menghadirkan kue-kue yang lezat dan
+            bermutu tinggi.
+          </p>
+        </div>
+        <div class="box">
+          <h3>Quick link</h3>
+          <a href="#"> <i class="fas fa-arrow-right"></i>Home</a>
+          <a href="#"> <i class="fas fa-arrow-right"></i>product</a>
+          <a href="#"> <i class="fas fa-arrow-right"></i>blogs</a>
+          <a href="#"> <i class="fas fa-arrow-right"></i>review</a>
+          <a href="#"> <i class="fas fa-arrow-right"></i>contact</a>
+        </div>
+        <div class="box">
+          <h3>Extra link</h3>
+          <a href="#"> <i class="fas fa-arrow-right"></i>Account info</a>
+          <a href="#"> <i class="fas fa-arrow-right"></i>order item</a>
+          <a href="#"> <i class="fas fa-arrow-right"></i>privacy policy</a>
+          <a href="https://shopee.co.id/"> <i class="fas fa-arrow-right"></i>payment method</a>
+          <a href="#"> <i class="fas fa-arrow-right"></i>our services</a>
+        </div>
+        <div class="box">
+          <h3>Contact Info</h3>
+          <a href="https://wa.me/+6285964274016"> <i class="fas fa-phone"></i>+62 859-6472-4016</a>
+          <a href="https://mail.google.com/mail/u/0/?hl=en"> <i class="fas fa-envelope"></i>adekkamal@gmail.com</a>
+          <a href="https://maps.app.goo.gl/7nNe2hscVGE6zRWp9"> <i class="fas fa-map"></i>Jl. Klambir V Gg. Intan No. 160</a>
+          <a href="https://shopee.co.id/"> <i class="fas fa-wallet"></i>(Shopee Pay) 085964724016</a>
+        </div>
+      </div>
+      <div class="share">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-whatsapp"></a>
+      </div>
+      <div class="credit">created by <span>Lina, Esa, Elsa, Tania</span> |all rights reserved !</div>
+    </footer>
+
+    <!-- swiper js link  -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- boostrap js link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- custom js file  -->
+    <script src="index.js"></script>
+  </body>
+</html>
